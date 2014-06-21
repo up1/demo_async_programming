@@ -1,0 +1,20 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Demo</title>
+  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+
+  <script type="text/javascript">
+    var request = new XMLHttpRequest();
+    request.open("GET", "./mydata.json", true);
+    request.onload = function(e) {
+        var result = request.responseText;
+        console.log("Got result", result);
+    };
+    request.send();
+  </script>
+
+</head>
+<body>
+</body>
+</html>
