@@ -1,0 +1,46 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+
+<script>
+(function() {
+
+ var getPosition = function (options) {
+    var deferred = $.Deferred();
+
+    navigator.geolocation.getCurrentPosition(
+        deferred.resolve,
+        deferred.reject,
+        options);
+
+    return deferred.promise();
+ };
+
+ var lookupCountry = function (position) {
+    var deferred = $.Deferred();
+
+    var latlng = new google.maps.LatLng(
+                        position.coords.latitude,
+                        position.coords.longitude);
+    var geoCoder = new google.maps.Geocoder();
+    geoCoder.geocode({ location: latlng }, deferred.resolve);
+
+    return deferred.promise();
+ };
+
+ var displayResults = function (results, status) {            
+    $("body").append("<div>").text(results[0].formatted_address);      
+ };
+
+ var displayError = function (error) {            
+    $("body").append("<div>").text("ERROR NAJAA : " + error.message);      
+ };
+
+ $(function () {
+    $.when(getPosition())
+     .then(lookupCountry)
+     .done(displayResults)
+     .fail(displayError)
+ });
+
+}());
+</script>

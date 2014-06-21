@@ -1,0 +1,9 @@
+<script>
+navigator.geolocation.getCurrentPosition(function(position) {
+  console.log("Success");
+}, function(error) {
+  console.log("Error");
+}, {
+  enableHighAccuracy: true
+});
+</script>
